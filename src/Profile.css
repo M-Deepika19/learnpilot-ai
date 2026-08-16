@@ -1,68 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #F4F9FF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  min-height: 100vh;
 }
 
 .profile-container {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
 .profile-card {
-    background-color: white;
-    width: 400px;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0px 5px 20px lightgray;
-    text-align: center;
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: slideUp 0.6s ease-out;
 }
 
 .profile-icon {
-    font-size: 70px;
-    margin-bottom: 10px;
+  font-size: 70px;
+  margin-bottom: 20px;
+  animation: bounce 0.6s ease-out;
 }
 
 .profile-card h1 {
-    color: #1E3A8A;
-    margin-bottom: 20px;
+  color: #4facfe;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
 }
 
 .profile-card h2 {
-    color: #374151;
-    margin-bottom: 30px;
+  color: #6B7280;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .profile-info {
-    text-align: left;
-    margin-bottom: 30px;
+  text-align: left;
+  margin-bottom: 35px;
+  background: #F3F4F6;
+  padding: 25px;
+  border-radius: 10px;
 }
 
 .profile-info p {
-    font-size: 17px;
-    margin: 15px 0;
-    color: #374151;
+  font-size: 15px;
+  margin: 16px 0;
+  color: #374151;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .profile-info strong {
-    display: inline-block;
-    width: 70px;
-    color: #1E3A8A;
+  color: #4facfe;
+  font-weight: 700;
 }
 
 .back-button {
-    width: 100%;
-    height: 45px;
-    background-color: #2563EB;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
 .back-button:hover {
-    background-color: #1D4ED8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.5);
+}
+
+.back-button:active {
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 30px;
+  }
+
+  .profile-icon {
+    font-size: 60px;
+  }
+
+  .profile-card h1 {
+    font-size: 26px;
+  }
+
+  .profile-info {
+    padding: 20px;
+  }
+
+  .profile-info p {
+    font-size: 14px;
+    margin: 12px 0;
+  }
+
+  .back-button {
+    height: 46px;
+    font-size: 15px;
+  }
 }
