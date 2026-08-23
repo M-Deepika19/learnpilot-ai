@@ -4,22 +4,18 @@ import axios from "axios";
 import "./Login.css";
 
 function Login() {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-
-        // Check empty fields
         if (!email || !password) {
             alert("Please enter Email and Password");
             return;
         }
 
         try {
-
             const response = await axios.post(
                 "http://localhost:8080/api/users/login",
                 {
@@ -28,35 +24,28 @@ function Login() {
                 }
             );
 
-            // Check login response
-            if (response.data === "Login Successfully") {
+            const user = response.data;
 
-                alert("Login Successfully");
+            localStorage.setItem("userEmail", user.email);
+            localStorage.setItem("userId", user.id.toString());
 
-                // Save logged-in user's email
-                localStorage.setItem("userEmail", email);
+            alert("Login Successfully");
 
-                // Go to Home page
-                navigate("/");
-
-            } else {
-
-                alert("Invalid Email or Password");
-
-            }
+            navigate("/home");
 
         } catch (error) {
-
             console.log("Login Error:", error);
 
-            alert("Unable to connect to the server");
-
+            if (error.response && error.response.data) {
+                alert(error.response.data);
+            } else {
+                alert("Unable to connect to the server");
+            }
         }
     };
 
     return (
         <div className="container">
-
             <div className="card">
 
                 <h1 className="title">
@@ -76,9 +65,7 @@ function Login() {
                     type="email"
                     placeholder="Enter your Email"
                     value={email}
-                    onChange={(event) =>
-                        setEmail(event.target.value)
-                    }
+                    onChange={(event) => setEmail(event.target.value)}
                 />
 
                 <label className="label">
@@ -90,9 +77,7 @@ function Login() {
                     type="password"
                     placeholder="Enter your Password"
                     value={password}
-                    onChange={(event) =>
-                        setPassword(event.target.value)
-                    }
+                    onChange={(event) => setPassword(event.target.value)}
                 />
 
                 <button
@@ -114,7 +99,6 @@ function Login() {
                 </p>
 
             </div>
-
         </div>
     );
 }
