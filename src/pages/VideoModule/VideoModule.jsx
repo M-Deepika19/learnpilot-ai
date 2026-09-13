@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VideoSearch from '../../components/VideoSearch/VideoSearch';
 import VideoRecommendation from '../../components/VideoRecommendation/VideoRecommendation';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import './VideoModule.css';
 
 const VideoModule = () => {
   const [searchResults, setSearchResults] = useState([]);
-  const [selectedVideoId, setSelectedVideoId] = useState(null);
-  const [selectedVideoTitle, setSelectedVideoTitle] = useState('');
+  const navigate = useNavigate();
 
   const handleSearch = (videos) => {
     setSearchResults(videos);
@@ -15,12 +14,9 @@ const VideoModule = () => {
   };
 
   const handleVideoSelect = (videoId, title) => {
-    setSelectedVideoId(videoId);
-    setSelectedVideoTitle(title);
-  };
-
-  const handleClosePlayer = () => {
-    setSelectedVideoId(null);
+    navigate(
+      `/videos-chat?v=${videoId}&title=${encodeURIComponent(title)}`
+    );
   };
 
   return (
@@ -32,16 +28,8 @@ const VideoModule = () => {
 
       <div className="video-module-container">
         <VideoSearch onSearch={handleSearch} />
-        
-        {selectedVideoId && (
-          <VideoPlayer 
-            videoId={selectedVideoId}
-            title={selectedVideoTitle}
-            onClose={handleClosePlayer}
-          />
-        )}
 
-        <VideoRecommendation 
+        <VideoRecommendation
           videos={searchResults}
           onVideoSelect={handleVideoSelect}
         />

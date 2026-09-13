@@ -4,58 +4,79 @@ import axios from "axios";
 import "./Register.css";
 
 function Register() {
-
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const handleRegister = async () => {
+        const trimmedName = name.trim();
+        const trimmedEmail = email.trim();
 
-        if (!name || !email || !password || !confirmPassword) {
-            alert("Please fill all fields");
+        if (!trimmedName || !trimmedEmail || !password) {
+            alert("Please fill in all fields");
             return;
         }
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
+        if (password.length < 6) {
+            alert("Password must contain at least 6 characters");
             return;
         }
 
         try {
+            setLoading(true);
 
             const response = await axios.post(
                 "http://localhost:8080/api/users/register",
                 {
-                    name: name,
-                    email: email,
+                    name: trimmedName,
+                    email: trimmedEmail,
                     password: password
                 }
             );
 
-            alert(response.data);
+            const message =
+                typeof response.data === "string"
+                    ? response.data
+                    : response.data?.message || "Registration successful";
 
-            // Go to Login after successful registration
+            alert(message);
+
+            localStorage.setItem("userName", trimmedName);
+            localStorage.setItem("userEmail", trimmedEmail);
+
             navigate("/login");
-
         } catch (error) {
-
             console.error("Registration Error:", error);
 
-            alert("Registration Failed");
+            if (error.response) {
+                const message =
+                    typeof error.response.data === "string"
+                        ? error.response.data
+                        : error.response.data?.message ||
+                          "Registration failed";
+
+                alert(message);
+            } else {
+                alert("Unable to connect to the server");
+            }
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <div className="container">
-
             <div className="card">
-
                 <h1 className="title">
-                    LearnPilotAI
+                    LearnPilot AI
                 </h1>
+
+                <p className="subtitle">
+                    AI-Powered Personalized Learning Platform
+                </p>
 
                 <label className="label">
                     Name
@@ -64,7 +85,7 @@ function Register() {
                 <input
                     className="input"
                     type="text"
-                    placeholder="Enter your Name"
+                    placeholder="Enter your name"
                     value={name}
                     onChange={(event) =>
                         setName(event.target.value)
@@ -78,7 +99,7 @@ function Register() {
                 <input
                     className="input"
                     type="email"
-                    placeholder="Enter your Email"
+                    placeholder="Enter your email"
                     value={email}
                     onChange={(event) =>
                         setEmail(event.target.value)
@@ -92,32 +113,19 @@ function Register() {
                 <input
                     className="input"
                     type="password"
-                    placeholder="Enter your Password"
+                    placeholder="Enter your password"
                     value={password}
                     onChange={(event) =>
                         setPassword(event.target.value)
                     }
                 />
 
-                <label className="label">
-                    Confirm Password
-                </label>
-
-                <input
-                    className="input"
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChange={(event) =>
-                        setConfirmPassword(event.target.value)
-                    }
-                />
-
                 <button
                     className="button"
                     onClick={handleRegister}
+                    disabled={loading}
                 >
-                    Create Account
+                    {loading ? "Creating Account..." : "Create Account"}
                 </button>
 
                 <p className="bottom-text">
@@ -130,9 +138,7 @@ function Register() {
                 >
                     Login
                 </p>
-
             </div>
-
         </div>
     );
 }
