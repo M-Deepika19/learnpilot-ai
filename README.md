@@ -1,16 +1,54 @@
-# React + Vite
+# LearnPilot AI 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered learning platform designed to help students learn, practice, and improve their programming skills.
 
-Currently, two official plugins are available:
+## 🎓 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**LearnPilot AI** is my final-year Computer Science project. It combines a modern web interface with AI-powered features to provide students with a more interactive learning experience.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🤖 AI-powered learning assistance
+- 💬 Interactive AI chat
+- 📝 AI-generated study notes
+- ❓ Quiz generation
+- 💻 Programming practice and compiler support
+- 📚 Student-focused learning experience
 
-## Expanding the ESLint configuration
+## 🛠️ Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- React
+- JavaScript
+- HTML
+- CSS
+- Vite
+
+### Backend
+- Java
+- Spring Boot
+- PostgreSQL
+
+### AI
+- Generative AI
+- RAG (Retrieval-Augmented Generation)
+
+## 📂 Project Structure
+
+This repository contains the **frontend** of LearnPilot AI.
+
+The backend is maintained in a separate repository.
+
+## 🎯 Project Goal
+
+To build an AI-assisted learning platform that makes programming education more interactive, accessible, and engaging for students.
+
+## 👩‍💻 Developer
+
+**Deepika M**  
+Final-Year Computer Science Student  
+Aspiring Software Developer
+
+---
+
+⭐ If you find this project interesting, feel free to explore the repository!
